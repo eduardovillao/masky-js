@@ -1,0 +1,79 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.pnp/
+.pnp.js
+
+# Build output
+*.log
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# macOS Thumbnails
+._*
+
+# macOS Folder attributes
+.Spotlight-V100
+.Trashes
+Icon?
+
+# macOS Files that might appear
+*.swp
+*.lock
+*.bak
+*.tmp
+*.orig
+*.cache
+
+# IDE/Editor
+.idea/
+.vscode/
+*.sublime-workspace
+
+# Logs
+logs/
+*.log
+logs/**/*.log
+npm-debug.log*
+yarn-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Coverage reports
+coverage/
+*.lcov
+
+# TypeScript
+*.tsbuildinfo
+
+# Miscellaneous
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.local
+
+# Temporary files
+*.tmp
+*.temp
+
+# Dependency directories
+jspm_packages/
+
+# Others
+*.tgz
+!.npmrc
+.vagrant/
+__pycache__/
+*.pid
+
+# Lock files
+*.lock
