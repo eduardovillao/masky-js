@@ -2,12 +2,12 @@
 
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/masky-js)](https://bundlephobia.com/package/masky-js)
 
-📦 Masky.js – A compact and **high-performance JavaScript library for input masking**. Weighing only **1.6 KB** (gzip), it’s optimized for fast loading and ideal for any project requiring lightweight, flexible, and customizable input masks.
+📦 Masky.js – A compact and **high-performance JavaScript library for input masking**. Weighing only **1.3 KB** (gzip), it’s optimized for fast loading and ideal for any project requiring lightweight, flexible, and customizable input masks.
 
 ---
 
 ## Features
-- **Super Lightweight:** Only **1.6 KB gzipped**, minimizing your app’s bundle size.
+- **Super Lightweight:** Only **1.3 KB gzipped**, minimizing your app’s bundle size.
 - **Automatic Enhancements:**
     - **inputmode support:** Dynamically adjusts for better mobile user experience.
     - **minlength and maxlength:** Automatically calculated based on the mask.
@@ -59,7 +59,7 @@ Masky.js provides the following tokens for creating masks:
 ## Why Masky.js?
 
 - **Automatic Enhancements:** Input mode (`inputmode`) and field limits (`minlength` and `maxlength`) are calculated and applied automatically based on the mask.
-- **Built for Performance:** With only 1.6 KB gzipped, it’s one of the most efficient libraries available.
+- **Built for Performance:** With only **1.3 KB** gzipped, it’s one of the most efficient libraries available.
 - **Flexibility:** Perfect for any environment—websites, frameworks, or CMS integrations.
 - **Ease of Integration:** Add `data-mask` to your inputs, and Masky.js takes care of formatting, validation, and user experience.
 
