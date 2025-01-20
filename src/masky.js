@@ -32,20 +32,31 @@ class inputMask {
     });
   }
 
-    setInputLength(input, mask, prefix = '', suffix = '') {
-        if(input.hasAttribute('minlength') && input.hasAttribute('maxlength')) {
-            return;
-        }
-
-        const maskLength = mask.length + (prefix?.length || 0) + (suffix?.length || 0);
-        if(!input.hasAttribute('minlength')) {
-            input.minLength = maskLength;
-        }
-
-        if(!input.hasAttribute('maxlength')) {
-            input.maxLength = maskLength;
-        }
+  setInputLength(input, mask, prefix = '', suffix = '') {
+    if(input.hasAttribute('minlength') && input.hasAttribute('maxlength')) {
+        return;
     }
+
+    const maskLength = mask.length + (prefix?.length || 0) + (suffix?.length || 0);
+    if(!input.hasAttribute('minlength')) {
+        input.minLength = maskLength;
+    }
+
+    if(!input.hasAttribute('maxlength')) {
+        input.maxLength = maskLength;
+    }
+  }
+
+  setInputMode(input, mask) {
+    if(input.hasAttribute('inputMode')) {
+      return;
+    }
+
+    const filteredTokens = [...mask].filter((char) => this.tokens[char]);
+    const uniqueTokens = [...new Set(filteredTokens)];
+    const isOnlyNumericMask = uniqueTokens.length === 1 && uniqueTokens[0] === '0';
+    input.inputMode = isOnlyNumericMask ? 'numeric' : 'text';
+  }
 
   maskInput(event) {
     const input = event.target;
@@ -56,13 +67,13 @@ class inputMask {
     }
 
     const mask = input.dataset.mask;
-    const value = input.value;
     const prefix = input.dataset.maskPrefix;
     const suffix = input.dataset.maskSuffix;
 
-        this.setInputLength(input, mask, prefix, suffix);
+    this.setInputLength(input, mask, prefix, suffix);
+    this.setInputMode(input, mask);
 
-    const unmaskedValue = this.removeMask(mask, value, prefix, suffix);
+    const unmaskedValue = this.removeMask(mask, input.value, prefix, suffix);
     const isReverse = input.dataset.maskReverse === 'true';
     const maskedValue = this.applyMask(
       unmaskedValue,
