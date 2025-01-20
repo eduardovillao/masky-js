@@ -23,7 +23,7 @@
 Add data-mask to your input fields, and the library will handle the rest:
 
 ```html
-<input type="text" data-mask="(99) 99999-9999" />
+<input type="text" data-mask="(00) 00000-0000" />
 <script src="dist/masky.min.js"></script>
 ```
 
@@ -40,8 +40,8 @@ Add data-mask-prefix or data-mask-suffix to include additional characters:
 Use data-mask-validation for built-in validation of CPF and CNPJ:
 
 ```html
-<input type="text" data-mask="999.999.999-99" data-mask-validation="cpf" />
-<input type="text" data-mask="99.999.999/9999-99" data-mask-validation="cnpj" />
+<input type="text" data-mask="000.000.000-00" data-mask-validation="cpf" />
+<input type="text" data-mask="00.000.000/0000-00" data-mask-validation="cnpj" />
 ```
 
 ## Available Tokens
@@ -64,7 +64,7 @@ Masky.js provides the following tokens for creating masks:
 ## Example
 
 ```html
-<input type="text" data-mask="(99) 99999-9999" />
+<input type="text" data-mask="(00) 00000-0000" />
 <input type="text" data-mask="000-000" data-mask-prefix="+55 " data-mask-suffix=" ext" />
 <input type="text" data-mask="AAA-SSS-000" />
 <script src="dist/masky.min.js"></script>
