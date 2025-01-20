@@ -1,6 +1,6 @@
 {
   "name": "masky-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A lightweight and flexible JavaScript library for input masking. Supports custom masks, prefixes, suffixes, and built-in CPF/CNPJ validation for forms.",
   "main": "dist/masky.min.js",
   "files": [
