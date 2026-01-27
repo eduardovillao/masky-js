@@ -1,3 +1,6 @@
+const CNPJ_POSITIONS_1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+const CNPJ_POSITIONS_2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+
 class inputMask {
   constructor() {
     this.inputs = null;
@@ -238,12 +241,9 @@ class inputMask {
       return remainder < 2 ? 0 : 11 - remainder;
     };
 
-    const positions1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
-    const positions2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
-
     const baseCNPJ = cnpj.slice(0, 12);
-    const digit1 = calculateDigit(baseCNPJ, positions1);
-    const digit2 = calculateDigit(baseCNPJ + digit1, positions2);
+    const digit1 = calculateDigit(baseCNPJ, CNPJ_POSITIONS_1);
+    const digit2 = calculateDigit(baseCNPJ + digit1, CNPJ_POSITIONS_2);
 
     return cnpj === baseCNPJ + digit1.toString() + digit2.toString();
   }

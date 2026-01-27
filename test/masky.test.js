@@ -151,32 +151,61 @@ describe('Masky JS Library', () => {
     });
 
     describe('CNPJ Validation', () => {
-      it('should mark valid CNPJ as valid', async () => {
+      it('should mark valid CNPJ as valid (Google Brasil)', async () => {
         const input = createInput({ 
           'data-mask': '00.000.000/0000-00', 
           'data-mask-validation': 'cnpj' 
         });
         await loadScript();
 
-        // Valid CNPJ: 11.444.777/0001-61
-        triggerInputEvent(input, '11444777000161');
+        // 06.990.590/0001-23
+        triggerInputEvent(input, '06990590000123');
         triggerBlurEvent(input);
 
         expect(input.validity.customError).toBe(false);
       });
 
-      it('should mark invalid CNPJ as invalid', async () => {
+      it('should mark CNPJ with invalid check digits as invalid', async () => {
         const input = createInput({ 
           'data-mask': '00.000.000/0000-00', 
           'data-mask-validation': 'cnpj' 
         });
         await loadScript();
 
-        triggerInputEvent(input, '00000000000000'); // Invalid
+        // 06.990.590/0001-24 (last digit changed)
+        triggerInputEvent(input, '06990590000124');
         triggerBlurEvent(input);
 
         expect(input.validity.customError).toBe(true);
         expect(input.validationMessage).toContain('Invalid CNPJ');
+      });
+
+      it('should invalidate repeated digits (blacklisted)', async () => {
+        const input = createInput({ 
+          'data-mask': '00.000.000/0000-00', 
+          'data-mask-validation': 'cnpj' 
+        });
+        await loadScript();
+
+        triggerInputEvent(input, '22222222222222');
+        triggerBlurEvent(input);
+
+        expect(input.validity.customError).toBe(true);
+      });
+
+      it('should strip non-numeric characters before validation', async () => {
+         const input = createInput({ 
+          'data-mask': '00.000.000/0000-00', 
+          'data-mask-validation': 'cnpj' 
+        });
+        await loadScript();
+
+        // Valid CNPJ but typed with some noise (which mask usually prevents, but if pasted or set directly)
+        // 06.990.590/0001-23
+        input.value = '06.990.590/0001-23'; // Simulating value already having format or noise
+        triggerBlurEvent(input);
+
+        expect(input.validity.customError).toBe(false);
       });
     });
     
