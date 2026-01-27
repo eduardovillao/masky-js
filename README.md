@@ -2,7 +2,7 @@
 
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/masky-js)](https://bundlephobia.com/package/masky-js)
 
-📦 Masky.js – A compact and **high-performance JavaScript library for input masking**. Weighing only **1.3 KB** (gzip), it’s optimized for fast loading and ideal for any project requiring lightweight, flexible, and customizable input masks.
+📦 Masky.js – A compact and **high-performance JavaScript library for input masking**. Weighing only **1.6 KB** (gzip), it’s optimized for fast loading and ideal for any project requiring lightweight, flexible, and customizable input masks.
 
 ---
 
