@@ -95,12 +95,12 @@ class inputMask {
       return value;
     }
 
-    if (prefix) {
-      value = value.replace(prefix, '');
+    if (prefix && value.startsWith(prefix)) {
+      value = value.substring(prefix.length);
     }
 
-    if (suffix) {
-      value = value.replace(suffix, '');
+    if (suffix && value.endsWith(suffix)) {
+      value = value.substring(0, value.length - suffix.length);
     }
 
     const allowTokens = Object.keys(this.tokens);
