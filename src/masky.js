@@ -8,6 +8,10 @@ class inputMask {
       '0': {
         validateRule: /\d/,
       },
+      'Z': {
+        validateRule: /\d/,
+        optional: true,
+      },
       'A': {
         validateRule: /[a-zA-Z0-9]/,
       },
@@ -41,8 +45,11 @@ class inputMask {
     }
 
     const maskLength = mask.length + (prefix?.length || 0) + (suffix?.length || 0);
+    const optionalCount = (mask.match(/Z/g) || []).length;
+    const requiredMaskLength = maskLength - optionalCount;
+
     if(!input.hasAttribute('minlength')) {
-        input.minLength = maskLength;
+       input.minLength = requiredMaskLength;
     }
 
     if(!input.hasAttribute('maxlength')) {
@@ -77,7 +84,11 @@ class inputMask {
     this.setInputMode(input, mask);
 
     const unmaskedValue = this.removeMask(mask, input.value, prefix, suffix);
-    const isReverse = input.dataset.maskReverse === 'true';
+    let isReverse = input.dataset.maskReverse === 'true';
+    if (!input.dataset.maskReverse) {
+      isReverse = mask.startsWith('Z');
+    }
+
     const maskedValue = this.applyMask(
       unmaskedValue,
       mask,
@@ -134,6 +145,8 @@ class inputMask {
         ) {
           maskedValue += unmaskedValue[valueIndex];
           valueIndex++;
+        } else if (token.optional) {
+          continue;
         } else {
           break;
         }
