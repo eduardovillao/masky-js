@@ -1,7 +1,7 @@
 {
   "name": "masky-js",
   "version": "1.0.3",
-  "description": "A lightweight and flexible JavaScript library for input masking. Supports custom masks, prefixes, suffixes, and built-in CPF/CNPJ validation for forms.",
+  "description": " Tiny, zero-dependency JavaScript input mask — declarative via HTML data-attributes, no build or framework needed. Custom masks, prefixes, suffixes, reverse/currency masks, and built-in CPF/CNPJ validation.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eduardovillao/masky-js.git"
@@ -14,13 +14,22 @@
     "build": "terser src/masky.js --compress --mangle --toplevel --ecma 2020 -o dist/masky.min.js"
   },
   "keywords": [
-    "JavaScript",
-    "form-validation",
+    "javascript",
+    "vanilla-js",
     "input-mask",
+    "inputmask",
+    "text-mask",
     "mask",
     "masking",
+    "currency-mask",
+    "phone-mask",
     "cpf",
-    "cnpj"
+    "cnpj",
+    "cpf-validation",
+    "cnpj-validation",
+    "zero-dependency",
+    "form-validation",
+    "astro"
   ],
   "author": "EduardoVillao",
   "license": "MIT",
