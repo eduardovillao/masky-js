@@ -41,7 +41,8 @@ class inputMask {
     }
 
     const maskLength = mask.length + (prefix?.length || 0) + (suffix?.length || 0);
-    if(!input.hasAttribute('minlength')) {
+    const isReverse = input.dataset.maskReverse === 'true';
+    if(!isReverse && !input.hasAttribute('minlength')) {
         input.minLength = maskLength;
     }
 
@@ -103,10 +104,13 @@ class inputMask {
       value = value.substring(0, value.length - suffix.length);
     }
 
-    const allowTokens = Object.keys(this.tokens);
-    const allowTokensRegex = new RegExp(`[${allowTokens.join('')}]`, 'g');
-    const maskLiteralsToRemove = mask.replace(allowTokensRegex, '');
-    return value.replace(new RegExp(`[${maskLiteralsToRemove}]`, 'g'), '');
+    const maskLiterals = new Set(
+      mask.split('').filter((char) => !this.tokens[char])
+    );
+    return value
+      .split('')
+      .filter((char) => !maskLiterals.has(char))
+      .join('');
   }
 
   applyMask(unmaskedValue, mask, isReverse, prefix, suffix) {

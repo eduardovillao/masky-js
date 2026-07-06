@@ -1,6 +1,6 @@
 {
   "name": "masky-js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": " Tiny, zero-dependency JavaScript input mask — declarative via HTML data-attributes, no build or framework needed. Custom masks, prefixes, suffixes, reverse/currency masks, and built-in CPF/CNPJ validation.",
   "repository": {
     "type": "git",
