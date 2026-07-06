@@ -2,123 +2,116 @@
 
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/masky-js)](https://bundlephobia.com/package/masky-js)
 
-📦 Masky.js – A compact and **high-performance JavaScript library for input masking**. Weighing only **1.6 KB** (gzip), it’s optimized for fast loading and ideal for any project requiring lightweight, flexible, and customizable input masks.
+📦 **Masky.js** — a tiny, dependency-free JavaScript library for input masking. At **~1.3 KB gzipped** it needs nothing more than a `<script>` tag and a `data-mask` attribute: no build step, no framework, no JavaScript to write.
+
+---
+
+## Perfect for static sites & AI-generated pages
+
+Masky.js is **fully declarative** — you add masks with HTML attributes, not code. That makes it a natural fit for static sites (Astro, Eleventy, plain HTML) and for pages built by AI tools: an LLM can add a working mask with a single attribute, with nothing to import, bundle, or initialize.
+
+Add the script, then describe your masks with attributes:
+
+```
+<script src="https://cdn.jsdelivr.net/npm/masky-js"></script>
+
+data-mask             pattern — tokens: 0=digit  A=alphanumeric  S=letter  (rest = literal)
+data-mask-prefix      text prepended       e.g. "R$ "
+data-mask-suffix      text appended        e.g. " kg"
+data-mask-reverse     "true" → fills right-to-left (currency)
+data-mask-validation  "cpf" | "cnpj"       validates on blur
+
+<input data-mask="(00) 00000-0000">
+<input data-mask="000.000.000-00" data-mask-validation="cpf">
+```
+
+💡 Paste that cheat sheet into your AI assistant (v0, Cursor, Claude…) and let it wire the masks into your forms.
 
 ---
 
 ## Features
-- **Super Lightweight:** Only **1.3 KB gzipped**, minimizing your app’s bundle size.
-- **Automatic Enhancements:**
-    - **inputmode support:** Dynamically adjusts for better mobile user experience.
-    - **minlength and maxlength:** Automatically calculated based on the mask.
-- **Built-in Validations:** Native support for CPF and CNPJ validation.
-- **Flexible Masks:** Add custom masks with prefixes, suffixes, and dynamic formatting.
-- **Ease of Use:** Just add data-mask and optional attributes—Masky.js does the rest.
-- **Vanilla JS:** Works without any dependencies, making it adaptable to any environment.
+
+- **Tiny & dependency-free** — ~1.3 KB gzipped (~1.1 KB brotli), vanilla JS, runs anywhere.
+- **Fully declarative** — configure everything through `data-*` attributes; no JS to write.
+- **Automatic enhancements** — derives `inputmode`, `minlength` and `maxlength` from the mask.
+- **Prefixes, suffixes and reverse (currency) masks.**
+- **Built-in CPF & CNPJ validation** for Brazilian forms.
 
 ---
 
 ## Usage
 
-**Basic Example**
-
-Add data-mask to your input fields, and the library will handle the rest:
+**Basic**
 
 ```html
 <input type="text" data-mask="(00) 00000-0000" />
-<script src="dist/masky.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/masky-js"></script>
 ```
 
-**Adding Prefixes and Suffixes**
-
-Add data-mask-prefix or data-mask-suffix to include additional characters:
+**Prefix & suffix**
 
 ```html
-<input type="text" data-mask="000-000" data-mask-prefix="+55 " data-mask-suffix=" ext" />
+<input
+    type="text"
+    data-mask="000-000"
+    data-mask-prefix="+55 "
+    data-mask-suffix=" ext"
+/>
 ```
 
-**Validating CPF and CNPJ**
-
-Use data-mask-validation for built-in validation of CPF and CNPJ:
+**CPF / CNPJ validation**
 
 ```html
 <input type="text" data-mask="000.000.000-00" data-mask-validation="cpf" />
 <input type="text" data-mask="00.000.000/0000-00" data-mask-validation="cnpj" />
 ```
 
-## Available Tokens
+Validation runs on `blur` through the native Constraint Validation API (`setCustomValidity`), so errors surface like any other HTML5 form validation.
 
-Masky.js provides the following tokens for creating masks:
+## Tokens
 
-| Token | Description           | Example Input | Example Mask |   |
-|-------|-----------------------|---------------|--------------|---|
-| 0     | Numeric digits only   | 123           | 000 → 123    |   |
-| A     | Alphanumeric          | 1aB           | AAA → 1AB    |   |
-| S     | Alphabetic characters | abc           | SSS → abc    |   |
+| Token | Matches           | Example       |
+| ----- | ----------------- | ------------- |
+| `0`   | Digits (0–9)      | `000` → `123` |
+| `A`   | Letters or digits | `AAA` → `1AB` |
+| `S`   | Letters only      | `SSS` → `abc` |
 
-## Why Masky.js?
-
-- **Automatic Enhancements:** Input mode (`inputmode`) and field limits (`minlength` and `maxlength`) are calculated and applied automatically based on the mask.
-- **Built for Performance:** With only **1.3 KB** gzipped, it’s one of the most efficient libraries available.
-- **Flexibility:** Perfect for any environment—websites, frameworks, or CMS integrations.
-- **Ease of Integration:** Add `data-mask` to your inputs, and Masky.js takes care of formatting, validation, and user experience.
-
-## Example
-
-```html
-<input type="text" data-mask="(00) 00000-0000" />
-<input type="text" data-mask="000-000" data-mask-prefix="+55 " data-mask-suffix=" ext" />
-<input type="text" data-mask="AAA-SSS-000" />
-<script src="dist/masky.min.js"></script>
-```
-
-- No need to manually define inputmode or limits-—Masky.js handles them automatically.
-- Add as much customization as needed with `data-mask-prefix` and `data-mask-suffix`.
+Any other character in the mask is treated as a literal (`.`, `-`, `/`, `(`, spaces, …).
 
 ## Installation
 
-### 🌐 Via CDN
+**🌐 CDN**
 
-Use Masky.js directly from a reliable CDN:
-
-jsDelivr
 ```html
 <script src="https://cdn.jsdelivr.net/npm/masky-js/dist/masky.min.js"></script>
-```
-
-UNPKG
-```html
+<!-- or -->
 <script src="https://unpkg.com/masky-js/dist/masky.min.js"></script>
 ```
 
-### 📦 Via npm
-
-Masky.js is available on npm. Install it using the following command:
+**📦 npm**
 
 ```bash
 npm install masky-js
 ```
 
-After installation, include the file in your project:
-
 ```js
-import 'masky-js/dist/masky.min.js';
+import "masky-js/dist/masky.min.js";
 ```
 
-### 📂 Copy the File
+The script runs on page load and masks every `input[data-mask]` it finds.
 
-For now, download or copy the file directly from the /dist directory of the repository:
+## FAQ
 
-1.	Go to the `/dist` folder in this repository.
-2.	Download or copy the `masky.min.js` file.
-3.	Include it in your project:
+**Does it work with React, Vue or Angular?**
+Masky.js writes straight to the input's `value` and scans the DOM once on load, which clashes with frameworks that own the value and re-render it. It's built for static and server-rendered HTML. Inside a controlled React/Vue component, reach for a mask solution designed for that model.
 
-```html
-<script src="path/to/masky.min.js"></script>
-```
+**Are inputs added after page load masked?**
+Not yet — Masky.js scans the page once on load, so inputs injected later (a modal, an SPA route) aren't picked up automatically.
 
 ## Contributing
-We welcome contributions! Fork the repository, create a branch, and open a pull request.
+
+Contributions are welcome — fork the repo, create a branch, and open a pull request.
 
 ## License
-This project is licensed under the [MIT License](https://mit-license.org/).
+
+[MIT](https://mit-license.org/)
