@@ -3,7 +3,6 @@ paths:
   - "package.json"
   - ".github/workflows/**"
   - "dist/**"
-  - "webpack.config.js"
 ---
 
 ## Build & Release
@@ -16,4 +15,4 @@ Publishing is tag-driven, not merge-driven:
 - Bump `version` in `package.json` and commit it BEFORE tagging; the tag must match. A `v*` tag whose number differs from package.json publishes the wrong version.
 - `test.yml` runs the suite on every push and PR to `main`.
 
-Webpack auto-discovers an entry for every `src/*.js`, so adding a source file silently produces a new published `dist/<name>.min.js` bundle.
+The build minifies the single entry `src/masky.js` with Terser (`--toplevel` mangles top-level names — safe only because the file exports nothing). It is not multi-entry: a new source file won't be built until you add it to the `build` script.

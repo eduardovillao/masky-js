@@ -8,7 +8,7 @@ Size is the whole point (**~1.6 KB gzipped**). Weigh every byte before adding co
 
 ```bash
 npx vitest run     # run tests — there is NO `npm test` script
-npm run build      # webpack + esbuild → dist/masky.min.js
+npm run build      # terser minify → dist/masky.min.js
 ```
 
 ## Conventions (`.claude/rules/`)
